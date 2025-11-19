@@ -1,28 +1,27 @@
 #include <stdio.h>
-#include <ctype.h>
+#include <string.h>
 int main() {
-char message[100], ch;
-int i, key, choice;
-printf("\n--- Caesar Cipher ---\n");
-printf("1. Encrypt\n2. Decrypt\nEnter choice: ");
-scanf("%d", &choice);
-getchar();
-printf("Enter message: ");
-fgets(message, sizeof(message), stdin);
-printf("Enter key (shift amount): ");
-scanf("%d", &key);
-for(i = 0; message[i] != '\0'; ++i) {
-ch = message[i];
-if(isalnum(ch)) {
-if(choice == 1) {
-ch = ch + key;
-}
-else if(choice == 2) {
-ch = ch - key;
-}
-message[i] = ch;
+char str[100];
+char key;
+int i;
+printf("\n--- XOR Encryption/Decryption ---\n");
+printf("Enter a string to encrypt/decrypt: ");
+fgets(str, sizeof(str), stdin);
+printf("Enter a single character key: ");
+scanf("%c", &key);
+printf("\nOriginal String: %s", str);
+for(i = 0; i < strlen(str); i++) {
+if(str[i] != '\n') {
+str[i] = str[i] ^ key;
 }
 }
-printf("\nResulting Message: %s\n", message);
+printf("Encrypted/Decrypted String: %s\n", str);
+printf("\n--- Verification (Applying key again) ---\n");
+for(i = 0; i < strlen(str); i++) {
+if(str[i] != '\n') {
+str[i] = str[i] ^ key;
+}
+}
+printf("Restored String: %s\n", str);
 return 0;
 }
