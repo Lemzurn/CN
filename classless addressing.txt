@@ -1,0 +1,16 @@
+#include <stdio.h>
+int main() {
+int ip[4], mask[4], netAddr[4];
+int i;
+printf("\n--- Classless Addressing (Network ID Calculator) ---\n");
+printf("Enter IP Address (format x.x.x.x): ");
+scanf("%d.%d.%d.%d", &ip[0], &ip[1], &ip[2], &ip[3]);
+printf("Enter Subnet Mask (format x.x.x.x): ");
+scanf("%d.%d.%d.%d", &mask[0], &mask[1], &mask[2], &mask[3]);
+for(i = 0; i < 4; i++) {
+netAddr[i] = ip[i] & mask[i];
+}
+printf("\nResulting Network Address: %d.%d.%d.%d\n",
+netAddr[0], netAddr[1], netAddr[2], netAddr[3]);
+return 0;
+}

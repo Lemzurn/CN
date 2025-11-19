@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int main() {
+char ip[20];
+int first_octet;
+printf("\n--- Classful Addressing Identifier ---\n");
+printf("Enter an IP address (e.g., 192.168.1.1): ");
+scanf("%s", ip);
+first_octet = atoi(ip);
+printf("The First Octet is: %d\n", first_octet);
+if (first_octet >= 1 && first_octet <= 127) {
+printf("Class: A\n");
+printf("Default Subnet Mask: 255.0.0.0\n");
+}
+else if (first_octet >= 128 && first_octet <= 191) {
+printf("Class: B\n");
+printf("Default Subnet Mask: 255.255.0.0\n");
+}
+else if (first_octet >= 192 && first_octet <= 223) {
+printf("Class: C\n");
+printf("Default Subnet Mask: 255.255.255.0\n");
+}
+else if (first_octet >= 224 && first_octet <= 239) {
+printf("Class: D (Multicast Addressing)\n");
+}
+else if (first_octet >= 240 && first_octet <= 255) {
+printf("Class: E (Reserved)\n");
+}
+else {
+printf("Invalid IP Address.\n");
+}
+return 0;
+}

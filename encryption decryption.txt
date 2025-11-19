@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <ctype.h>
+int main() {
+char message[100], ch;
+int i, key, choice;
+printf("\n--- Caesar Cipher ---\n");
+printf("1. Encrypt\n2. Decrypt\nEnter choice: ");
+scanf("%d", &choice);
+getchar();
+printf("Enter message: ");
+fgets(message, sizeof(message), stdin);
+printf("Enter key (shift amount): ");
+scanf("%d", &key);
+for(i = 0; message[i] != '\0'; ++i) {
+ch = message[i];
+if(isalnum(ch)) {
+if(choice == 1) {
+ch = ch + key;
+}
+else if(choice == 2) {
+ch = ch - key;
+}
+message[i] = ch;
+}
+}
+printf("\nResulting Message: %s\n", message);
+return 0;
+}

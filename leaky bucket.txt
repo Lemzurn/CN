@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+int incoming, outgoing, buck_size, n, store = 0;
+printf("\n--- Leaky Bucket Congestion Control (Randomized) ---\n");
+printf("Enter bucket size: ");
+scanf("%d", &buck_size);
+printf("Enter outgoing rate: ");
+scanf("%d", &outgoing);
+printf("Enter number of packets to simulate: ");
+scanf("%d", &n);
+for (int i = 1; i <= n; i++) {
+incoming = (rand() % 10 + 1) * 10;
+printf("\nTime %d: Incoming Packet size: %d\n", i, incoming);
+int space_left = buck_size - store;
+if (incoming <= space_left) {
+store += incoming;
+printf("   -> Packet Accepted. Bucket Status: %d/%d\n", store, buck_size);
+} else {
+printf("   -> Packet Dropped (Size %d > Space Left %d). Bucket Status: %d/%d\n", incoming, space_left, store, buck_size);
+}
+store = store - outgoing;
+if(store < 0) store = 0;
+printf("   -> After Outgoing: %d bytes left in bucket\n", store);
+}
+return 0;
+}
