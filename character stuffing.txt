@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+int main() {
+char data[50];
+printf("Enter string (use '$' as flag): ");
+scanf("%s",data);
+printf("Stuffed: $");
+for(int i=0;i<strlen(data);i++) {
+if(data[i]=='$') printf("#");
+printf("%c",data[i]);
+}
+printf("$\n");
+return 0;
+}

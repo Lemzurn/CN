@@ -1,0 +1,25 @@
+#include <stdio.h>
+int calculate_checksum(int a[],int n) {
+int sum=0;
+for(int i=0;i<n;i++) sum+=a[i];
+return ~sum;
+}
+int main() {
+int a[10],n,sent_check,recv_check,temp_sum;
+printf("\n--- SENDER ---\n");
+printf("Enter size of string (number of segments): ");
+scanf("%d",&n);
+printf("Enter elements (e.g., 10 20 30): ");
+for(int i=0;i<n;i++) scanf("%d",&a[i]);
+sent_check=calculate_checksum(a,n);
+printf("Sender Checksum: %d\n",sent_check);
+printf("\n--- RECEIVER ---\n");
+printf("Enter received elements ");
+for(int i=0;i<n;i++) scanf("%d",&a[i]);
+int sum=0;
+for(int i=0;i<n;i++) sum+=a[i];
+sum+=sent_check;
+if(~sum==0) printf("NO ERROR IN TRANSMISSION\n");
+else printf("ERROR DETECTED\n");
+return 0;
+}

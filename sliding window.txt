@@ -1,0 +1,25 @@
+#include <stdio.h>
+int main() {
+int window,sent=0,ack,frames;
+printf("Enter total frames to send: ");
+scanf("%d",&frames);
+printf("Enter Window Size: ");
+scanf("%d",&window);
+while(sent<frames) {
+printf("\nTransmitting window: ");
+for(int i=0;i<window&&(sent+i)<frames;i++) {
+printf("%d ",sent+i);
+}
+printf("\nEnter the last ACK received: ");
+scanf("%d",&ack);
+if(ack>sent) {
+sent=ack;
+printf("ACK accepted. Window slides to %d\n",sent);
+}
+else {
+printf("Timeout/Error! Resending window from %d\n",sent);
+}
+}
+printf("All frames sent.\n");
+return 0;
+}
