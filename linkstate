@@ -1,0 +1,35 @@
+#include <stdio.h>
+#define INF 9999
+int main() {
+int n,cost[10][10],dist[10],visited[10],src;
+printf("Link State Routing (Shortest Path Calculation)\n");
+printf("Enter number of routers: ");
+scanf("%d",&n);
+printf("Enter Cost Matrix:\n");
+for(int i=0;i<n;i++)
+for(int j=0;j<n;j++) scanf("%d",&cost[i][j]);
+printf("Enter Source Router: ");
+scanf("%d",&src);
+for(int i=0;i<n;i++) {
+visited[i]=0;
+dist[i]=cost[src][i];
+}
+visited[src]=1;
+dist[src]=0;
+for(int i=0;i<n-1;i++) {
+int min=INF,u=0;
+for(int j=0;j<n;j++) {
+if(!visited[j]&&dist[j]<min) {
+min=dist[j];
+u=j;
+}
+}
+visited[u]=1;
+for(int v=0;v<n;v++) {
+if(!visited[v]&&min+cost[u][v]<dist[v]) dist[v]=min+cost[u][v];
+}
+}
+printf("Routing Table for Router %d:\n",src);
+for(int i=0;i<n;i++) printf("To Node %d: Cost %d\n",i,dist[i]);
+return 0;
+}
